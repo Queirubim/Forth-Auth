@@ -1,0 +1,62 @@
+@authToken = {{autenticate.response.body.accessToken}}
+
+@refreshToken = {{autenticate.response.body.refreshToken}}
+
+### Cria um usuario
+POST http://localhost:3000/user
+Content-Type: application/json
+
+{
+  "name": "Som",
+  "email": "som@email.com",
+  "password": "P@s$w0rD" 
+}
+
+### Busca Varios Usuario
+GET http://localhost:3000/user/?limit=30&offset=0
+Authorization: Bearer {{authToken}}
+
+### Atualiza um Usuario
+PATCH http://localhost:3000/user
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "name": "CuboMagico"
+}
+### Remove um Usuario
+DELETE http://localhost:3000/user/
+Authorization: Bearer {{authToken}}
+
+### Faz Login
+# @name autenticate
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "cubo@email.com",
+  "password": "P@s$w0rD"
+}
+
+### Mantem Logado
+# @name refresh
+POST http://localhost:3000/auth/refresh
+Content-Type: application/json
+
+{
+  "refreshToken": "{{refreshToken}}"
+}
+
+
+### Manda chave de ativação
+POST http://localhost:3000/auth/verify
+Authorization: Bearer {{authToken}}
+
+### Ativa a conta
+POST http://localhost:3000/auth/activate
+Authorization: Bearer {{authToken}}
+Content-Type: application/json
+
+{
+  "activationKey": 7248
+}

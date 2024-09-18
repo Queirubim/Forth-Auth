@@ -1,0 +1,23 @@
+services:
+  postgres:
+    image: postgres:latest
+    ports:
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=nest
+    volumes:
+      - ./postgres_data:/var/lib/postgres
+
+  redis:
+    image: redis:6.2.3-alpine
+    ports:
+      - '6379:6379'
+    environment:
+      NODE_ENV: development
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: '0.1'
+    #       memory: '10M'
